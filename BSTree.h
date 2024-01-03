@@ -9,7 +9,7 @@ template <typename T>
 class BSTree {
     private:
         int nelem;
-	BSNode<T>* root;
+	BSNode<T>* root;	
 	BSNode<T>* search(BSNode<T>* n, T e) const{
 		if(n == nullptr)
 			throw std::runtime_error("Element not found!");
@@ -22,7 +22,7 @@ class BSTree {
 	}
 	BSNode<T>* insert(BSNode<T>* n, T e){
 		if(n == nullptr)
-			n = new BSNode<T>(e);
+			n = new BSNode(e);
 		else if(n->elem == e)
 		       throw std::runtime_error("Duplicated element!");
 		else if(n->elem < e)
@@ -61,7 +61,7 @@ class BSTree {
 	}
 	T max(BSNode<T>* n){
 		if(n == nullptr)
-			throw std::runtime_error("Element not found!");
+			throw std::runtime_error("");
 		else if(n->right != nullptr)
 			return max(n->right);
 		else
@@ -70,9 +70,10 @@ class BSTree {
 	BSNode<T>* remove_max(BSNode<T>* n){
 		if(n->right == nullptr)
 			return n->left;
-		else
+		else{
 			n->right = remove_max(n->right);
-		return n;
+			return n;
+		}
 	}
 	void delete_cascade(BSNode<T>* n){
 		if(n == nullptr)
@@ -80,9 +81,9 @@ class BSTree {
 		delete_cascade(n->left);
 		delete_cascade(n->right);
 		delete n;
-	}	
+	}
 
-    public:
+    public:	
         BSTree(){
 		nelem = 0;
 		root = nullptr;
